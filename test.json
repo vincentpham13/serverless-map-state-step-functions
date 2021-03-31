@@ -1,0 +1,208 @@
+{
+  "ship-date": "2016-03-14T01:59:00Z",
+  "detail": {
+    "delivery-partner": "UQS",
+    "shipped": [
+      {
+        "prod": "PRO-Sesidba",
+        "dest-code": 9511,
+        "quantity": 1344
+      },
+      {
+        "prod": "PRO-Idjezvo",
+        "dest-code": 9511,
+        "quantity": 40
+      },
+      {
+        "prod": "PRO-Guttafar",
+        "dest-code": 9833,
+        "quantity": 12
+      },
+      {
+        "prod": "PRO-Nukeztu",
+        "dest-code": 9860,
+        "quantity": 887
+      },
+      {
+        "prod": "PRO-Fajoggap",
+        "dest-code": 9511,
+        "quantity": 1220
+      },
+      {
+        "prod": "PRO-Udvizi",
+        "dest-code": 9511,
+        "quantity": 1344
+      },
+      {
+        "prod": "PRO-Uwocitlo",
+        "dest-code": 9511,
+        "quantity": 40
+      },
+      {
+        "prod": "PRO-Sewohek",
+        "dest-code": 9833,
+        "quantity": 12
+      },
+      {
+        "prod": "PRO-Mofosca",
+        "dest-code": 9860,
+        "quantity": 887
+      },
+      {
+        "prod": "PRO-Zehhekhik",
+        "dest-code": 9511,
+        "quantity": 1220
+      },
+      {
+        "prod": "PRO-Natfasus",
+        "dest-code": 9511,
+        "quantity": 1344
+      },
+      {
+        "prod": "PRO-Jatadpul",
+        "dest-code": 9511,
+        "quantity": 40
+      },
+      {
+        "prod": "PRO-Sidfuggum",
+        "dest-code": 9833,
+        "quantity": 12
+      },
+      {
+        "prod": "PRO-Zeczalocu",
+        "dest-code": 9860,
+        "quantity": 887
+      },
+      {
+        "prod": "PRO-Lilaipu",
+        "dest-code": 9511,
+        "quantity": 1220
+      },
+      {
+        "prod": "PRO-Cekimok",
+        "dest-code": 9511,
+        "quantity": 1344
+      },
+      {
+        "prod": "PRO-Togosez",
+        "dest-code": 9511,
+        "quantity": 40
+      },
+      {
+        "prod": "PRO-Vuptibiw",
+        "dest-code": 9833,
+        "quantity": 12
+      },
+      {
+        "prod": "PRO-Lenzergo",
+        "dest-code": 9860,
+        "quantity": 887
+      },
+      {
+        "prod": "PRO-Hefhiszok",
+        "dest-code": 9511,
+        "quantity": 1220
+      },
+      {
+        "prod": "PRO-Fefetewu",
+        "dest-code": 9511,
+        "quantity": 1344
+      },
+      {
+        "prod": "PRO-Halkapzuj",
+        "dest-code": 9511,
+        "quantity": 40
+      },
+      {
+        "prod": "PRO-Humdiseb",
+        "dest-code": 9833,
+        "quantity": 12
+      },
+      {
+        "prod": "PRO-Forheona",
+        "dest-code": 9860,
+        "quantity": 887
+      },
+      {
+        "prod": "PRO-Uncoheb",
+        "dest-code": 9511,
+        "quantity": 1220
+      },
+      {
+        "prod": "PRO-Cogpafe",
+        "dest-code": 9511,
+        "quantity": 1344
+      },
+      {
+        "prod": "PRO-Vivehtaf",
+        "dest-code": 9511,
+        "quantity": 40
+      },
+      {
+        "prod": "PRO-Zawziud",
+        "dest-code": 9833,
+        "quantity": 12
+      },
+      {
+        "prod": "PRO-Maweahu",
+        "dest-code": 9860,
+        "quantity": 887
+      },
+      {
+        "prod": "PRO-Ecnojub",
+        "dest-code": 9511,
+        "quantity": 1220
+      },
+      {
+        "prod": "PRO-Lodazep",
+        "dest-code": 9511,
+        "quantity": 1344
+      },
+      {
+        "prod": "PRO-Dujwejo",
+        "dest-code": 9511,
+        "quantity": 40
+      },
+      {
+        "prod": "PRO-Zisunzi",
+        "dest-code": 9833,
+        "quantity": 12
+      },
+      {
+        "prod": "PRO-Duwauve",
+        "dest-code": 9860,
+        "quantity": 887
+      },
+      {
+        "prod": "PRO-Ijubume",
+        "dest-code": 9511,
+        "quantity": 1220
+      },
+      {
+        "prod": "PRO-Peejso",
+        "dest-code": 9511,
+        "quantity": 1344
+      },
+      {
+        "prod": "PRO-Nuceco",
+        "dest-code": 9511,
+        "quantity": 40
+      },
+      {
+        "prod": "PRO-Unufozode",
+        "dest-code": 9833,
+        "quantity": 12
+      },
+      {
+        "prod": "PRO-Ojvelu",
+        "dest-code": 9860,
+        "quantity": 887
+      },
+      {
+        "prod": "PRO-Wiseli",
+        "dest-code": 9511,
+        "quantity": 1220
+      }
+    ]
+  }
+}
