@@ -1,13 +1,13 @@
 'use strict';
 
-module.exports.LogInvocationTime = async (event) => {
+const LogInvocationTime = async (event) => {
   const invocationTime = `Invocation Time: ${new Date().getTime()}`;
   console.log(invocationTime);
 
   return invocationTime;
 };
 
-module.exports.FailFunction = async (event) => {
+const FailFunction = async (event) => {
   const product = event.Payload.ShippedItem;
   function CustomError(message) {
     this.name = 'CustomError';
@@ -25,4 +25,16 @@ module.exports.FailFunction = async (event) => {
 
   console.log(`${product.prod}:Generated number: ${randomNumber}`);
   return randomNumber;
+};
+
+const LogData = async function (event) {
+  console.log(event);
+
+  return true;
+}
+
+module.exports = {
+  LogInvocationTime,
+  FailFunction,
+  LogData,
 };

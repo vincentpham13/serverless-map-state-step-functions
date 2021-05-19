@@ -83,6 +83,12 @@
         "LogGroupName": "/aws/lambda/serverless-map-input-dev-FailFunction"
       }
     },
+    "LogDataLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/serverless-map-input-dev-LogData"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -167,7 +173,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-map-input/dev/1617185791072-2021-03-31T10:16:31.072Z/serverless-map-input.zip"
+          "S3Key": "serverless/serverless-map-input/dev/1621413198423-2021-05-19T08:33:18.423Z/serverless-map-input.zip"
         },
         "Handler": "handler.LogInvocationTime",
         "Runtime": "nodejs12.x",
@@ -192,7 +198,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-map-input/dev/1617185791072-2021-03-31T10:16:31.072Z/serverless-map-input.zip"
+          "S3Key": "serverless/serverless-map-input/dev/1621413198423-2021-05-19T08:33:18.423Z/serverless-map-input.zip"
         },
         "Handler": "handler.FailFunction",
         "Runtime": "nodejs12.x",
@@ -210,24 +216,59 @@
         "FailFunctionLogGroup"
       ]
     },
-    "LogInvocationTimeLambdaVersionktEtzIgM0A2N6NIhMXGz6cWFMbXeZnKS1bmL0CoBU": {
+    "LogDataLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/serverless-map-input/dev/1621413198423-2021-05-19T08:33:18.423Z/serverless-map-input.zip"
+        },
+        "Handler": "handler.LogData",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "serverless-map-input-dev-LogData",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "LogDataLogGroup"
+      ]
+    },
+    "LogInvocationTimeLambdaVersioni8UfczqVvSMYLuq8w1AXmsYVyGXrCpHBcn0itI2c": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "LogInvocationTimeLambdaFunction"
         },
-        "CodeSha256": "GlG6FkS9yyj2sz7HP5ulx/vdSURu/rDk5nwQe8la0iY="
+        "CodeSha256": "S7nQy8pJVo0cevydxBLpwB58Q/WYaIYmGyVjWyY6dkg="
       }
     },
-    "FailFunctionLambdaVersionw219zpb7Gvl1AkJeUKRvy3wlfzEUdoN3963QeCwl5Q": {
+    "FailFunctionLambdaVersionyb4lyHp6sXP6VbwARe3jxP7ngLEhcBKd1G3ajIbaU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "FailFunctionLambdaFunction"
         },
-        "CodeSha256": "GlG6FkS9yyj2sz7HP5ulx/vdSURu/rDk5nwQe8la0iY="
+        "CodeSha256": "S7nQy8pJVo0cevydxBLpwB58Q/WYaIYmGyVjWyY6dkg="
+      }
+    },
+    "LogDataLambdaVersionl5mpQEG9Cm2EI4NfkEEs45YSwOO3dmq08kK4upho": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "LogDataLambdaFunction"
+        },
+        "CodeSha256": "S7nQy8pJVo0cevydxBLpwB58Q/WYaIYmGyVjWyY6dkg="
       }
     },
     "MapInputStepFnRole": {
@@ -275,6 +316,25 @@
                           }
                         }
                       ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "LogDataLambdaFunction",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::Sub": [
+                        "${functionArn}:*",
+                        {
+                          "functionArn": {
+                            "Fn::GetAtt": [
+                              "LogDataLambdaFunction",
+                              "Arn"
+                            ]
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -289,7 +349,7 @@
       "Properties": {
         "DefinitionString": {
           "Fn::Sub": [
-            "{\n  \"Comment\": \"An example of map-state in step functions\",\n  \"StartAt\": \"ProcessShipments\",\n  \"States\": {\n    \"ProcessShipments\": {\n      \"Type\": \"Map\",\n      \"InputPath\": \"$.detail\",\n      \"ItemsPath\": \"$.shipped\",\n      \"MaxConcurrency\": 5,\n      \"ResultPath\": \"$.detail.shipped\",\n      \"Iterator\": {\n        \"StartAt\": \"GenerateRandomNumber\",\n        \"States\": {\n          \"GenerateRandomNumber\": {\n            \"Type\": \"Task\",\n            \"Resource\": \"${9c522e6f4081d9d9965900130a778065}\",\n            \"Parameters\": {\n              \"FunctionName\": \"${a47cf4aeb7e0db724683db10e17364b0}\",\n              \"Payload\": {\n                \"ShippedItem.$\": \"$\"\n              }\n            },\n            \"TimeoutSeconds\": 12,\n            \"Retry\": [\n              {\n                \"ErrorEquals\": [\n                  \"CustomError\"\n                ],\n                \"IntervalSeconds\": 1,\n                \"MaxAttempts\": 3,\n                \"BackoffRate\": 1\n              }\n            ],\n            \"Catch\": [\n              {\n                \"ErrorEquals\": [\n                  \"CustomError\"\n                ],\n                \"Next\": \"CommitNumberResult\"\n              }\n            ],\n            \"End\": true\n          },\n          \"CommitNumberResult\": {\n            \"Type\": \"Pass\",\n            \"Result\": \"Can not generate the number less than 50\",\n            \"End\": true\n          }\n        }\n      },\n      \"End\": true\n    }\n  }\n}",
+            "{\n  \"Comment\": \"An example of map-state in step functions\",\n  \"StartAt\": \"ProcessShipments\",\n  \"States\": {\n    \"ProcessShipments\": {\n      \"Type\": \"Map\",\n      \"InputPath\": \"$.detail\",\n      \"ItemsPath\": \"$.shipped\",\n      \"MaxConcurrency\": 10,\n      \"ResultPath\": \"$.detail.shipped\",\n      \"Iterator\": {\n        \"StartAt\": \"GenerateRandomNumber\",\n        \"States\": {\n          \"GenerateRandomNumber\": {\n            \"Type\": \"Task\",\n            \"Resource\": \"${9c522e6f4081d9d9965900130a778065}\",\n            \"Parameters\": {\n              \"FunctionName\": \"${a47cf4aeb7e0db724683db10e17364b0}\",\n              \"Payload\": {\n                \"ShippedItem.$\": \"$\"\n              }\n            },\n            \"TimeoutSeconds\": 12,\n            \"Retry\": [\n              {\n                \"ErrorEquals\": [\n                  \"CustomError\"\n                ],\n                \"IntervalSeconds\": 1,\n                \"MaxAttempts\": 3,\n                \"BackoffRate\": 1\n              }\n            ],\n            \"Catch\": [\n              {\n                \"ErrorEquals\": [\n                  \"CustomError\"\n                ],\n                \"Next\": \"CommitNumberResult\"\n              }\n            ],\n            \"Next\": \"LogData\"\n          },\n          \"CommitNumberResult\": {\n            \"Type\": \"Pass\",\n            \"Result\": \"Can not generate the number less than 50\",\n            \"Next\": \"LogData\"\n          },\n          \"LogData\": {\n            \"Type\": \"Task\",\n            \"Resource\": \"${75926682c097e512e724c0e0c31b1b9b}\",\n            \"End\": true\n          }\n        }\n      },\n      \"End\": true\n    }\n  }\n}",
             {
               "9c522e6f4081d9d9965900130a778065": {
                 "Fn::GetAtt": [
@@ -299,6 +359,12 @@
               },
               "a47cf4aeb7e0db724683db10e17364b0": {
                 "Ref": "FailFunctionLambdaFunction"
+              },
+              "75926682c097e512e724c0e0c31b1b9b": {
+                "Fn::GetAtt": [
+                  "LogDataLambdaFunction",
+                  "Arn"
+                ]
               }
             }
           ]
@@ -465,7 +531,7 @@
         ]
       }
     },
-    "ApiGatewayDeployment1617185785829": {
+    "ApiGatewayDeployment1621413192452": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -482,24 +548,45 @@
     "ServerlessDeploymentBucketName": {
       "Value": {
         "Ref": "ServerlessDeploymentBucket"
+      },
+      "Export": {
+        "Name": "sls-serverless-map-input-dev-ServerlessDeploymentBucketName"
       }
     },
     "LogInvocationTimeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "LogInvocationTimeLambdaVersionktEtzIgM0A2N6NIhMXGz6cWFMbXeZnKS1bmL0CoBU"
+        "Ref": "LogInvocationTimeLambdaVersioni8UfczqVvSMYLuq8w1AXmsYVyGXrCpHBcn0itI2c"
+      },
+      "Export": {
+        "Name": "sls-serverless-map-input-dev-LogInvocationTimeLambdaFunctionQualifiedArn"
       }
     },
     "FailFunctionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "FailFunctionLambdaVersionw219zpb7Gvl1AkJeUKRvy3wlfzEUdoN3963QeCwl5Q"
+        "Ref": "FailFunctionLambdaVersionyb4lyHp6sXP6VbwARe3jxP7ngLEhcBKd1G3ajIbaU"
+      },
+      "Export": {
+        "Name": "sls-serverless-map-input-dev-FailFunctionLambdaFunctionQualifiedArn"
+      }
+    },
+    "LogDataLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "LogDataLambdaVersionl5mpQEG9Cm2EI4NfkEEs45YSwOO3dmq08kK4upho"
+      },
+      "Export": {
+        "Name": "sls-serverless-map-input-dev-LogDataLambdaFunctionQualifiedArn"
       }
     },
     "MapInputStepFnArn": {
       "Description": "Current StateMachine Arn",
       "Value": {
         "Ref": "MapInputStepFn"
+      },
+      "Export": {
+        "Name": "sls-serverless-map-input-dev-MapInputStepFnArn"
       }
     },
     "ServiceEndpoint": {
@@ -523,6 +610,9 @@
             "/dev"
           ]
         ]
+      },
+      "Export": {
+        "Name": "sls-serverless-map-input-dev-ServiceEndpoint"
       }
     }
   }

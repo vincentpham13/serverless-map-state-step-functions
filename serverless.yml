@@ -24,6 +24,8 @@ provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
+  region: us-east-1
+  profile: default-old
 
 # you can overwrite defaults here
 #  stage: dev
@@ -63,6 +65,8 @@ functions:
     handler: handler.LogInvocationTime
   FailFunction:
     handler: handler.FailFunction
+  LogData:
+    handler: handler.LogData
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
@@ -141,10 +145,15 @@ stepFunctions:
                   Catch:
                     - ErrorEquals: ["CustomError"]
                       Next: CommitNumberResult
-                  End: true
+                  Next: LogData
                 CommitNumberResult:
                   Type: Pass
                   Result: Can not generate the number less than 50
+                  Next: LogData
+                LogData:
+                  Type: Task
+                  Resource:
+                    Fn::GetAtt: [LogData, Arn]
                   End: true
             End: true
 
